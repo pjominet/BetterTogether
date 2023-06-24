@@ -1,0 +1,40 @@
+﻿@page
+@using BetterTogether.Web.Infrastructure
+@model BetterTogether.Web.Areas.Admin.Pages.Events.EditModel
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<section class="p-3 bg-light">
+    <h3>@ViewData["Title"] @Model.Event.Id</h3>
+    <form method="post">
+        <input type="hidden" name="eventId" value="@Model.Event.Id"/>
+        <div class="mb-3">
+            <label class="form-label" for="nameInput">Name</label>
+            <input class="form-control" type="text" asp-for="EventEdit.Name" value="@Model.Event.Name" id="nameInput"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="descriptionArea">Description</label>
+            <textarea class="form-control" type="text" asp-for="EventEdit.Description" id="descriptionArea" rows="7">@Model.Event.Description</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="nameInput">Start Date & Time</label>
+            <input class="form-control" type="datetime-local" min="@DateTime.Now.ToIso8601String()" asp-for="EventEdit.StartDate" value="@Model.Event.StartDate.ToIso8601String()" id="startDateInput"/>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="EventEdit.IsActive" value="@Model.Event.IsActive" id="isActiveCheck">
+                <label class="form-check-label" for="isActiveCheck">Is Active</label>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-secondary" asp-area="Admin" asp-page="/Events/Index">Cancel</a>
+            <button class="btn btn-success">Save</button>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

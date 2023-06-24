@@ -1,0 +1,63 @@
+﻿@page
+@model BetterTogether.Web.Areas.Admin.Pages.Events.IndexModel
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<section class="bg-light p-3">
+    <h3>@ViewData["Title"]</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var e in Model.Events)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.Name</td>
+                <td class="text-truncate">
+                    @e.Description
+                </td>
+                <td>@e.StartDate</td>
+                <td>
+                    @if (e.IsActive)
+                    {
+                        <i class="bi bi-check-lg text-success"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x text-danger"></i>
+                    }
+                </td>
+                <td>
+                    <div class="hstack gap-2">
+                        <a class="btn btn-sm btn-warning" asp-area="Admin" asp-page="/Events/Edit" asp-route-eventId="@e.Id">Edit</a>
+                        <form method="post" asp-area="Admin" asp-page-handler="Delete">
+                            <input type="hidden" name="eventId" value="@e.Id"/>
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="my-3">
+        <a class="btn btn-success" asp-area="Admin" asp-page="/Events/Create">Create Event</a>
+    </div>
+    <hr/>
+    <div class="d-flex justify-content-end mt-3">
+        <form method="post" asp-page-handler="Purge">
+            <button type="submit" class="btn btn-danger">Purge Sign-ups</button>
+        </form>
+    </div>
+</section>

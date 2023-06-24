@@ -4,7 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>aspnet-BetterTogether.Web-F8E341C4-A7EB-4D17-A9C5-05F20DCFEA02</UserSecretsId>
+        <UserSecretsId>F8E341C4-A7EB-4D17-A9C5-05F20DCFEA02</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,6 +30,21 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Areas\Admin\Pages\Events\Create.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Pages\Events\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Events\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Events\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Events\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
     </ItemGroup>
 
 </Project>

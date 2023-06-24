@@ -3,6 +3,7 @@ using System;
 using BetterTogether.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,75 +11,20 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BetterTogether.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230624085503_AddSignUpsMigration")]
+    partial class AddSignUpsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
-
-            modelBuilder.Entity("BetterTogether.Web.Data.Entities.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2023, 6, 24, 19, 56, 47, 392, DateTimeKind.Local).AddTicks(424));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Event", (string)null);
-                });
-
-            modelBuilder.Entity("BetterTogether.Web.Data.Entities.EventSignUp", b =>
-                {
-                    b.Property<int>("EventId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SignUpId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("EventId", "SignUpId");
-
-                    b.HasIndex("SignUpId");
-
-                    b.ToTable("EventSignUp", (string)null);
-                });
 
             modelBuilder.Entity("BetterTogether.Web.Data.Entities.SignUp", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2023, 6, 24, 19, 56, 47, 392, DateTimeKind.Local).AddTicks(3210));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -286,25 +232,6 @@ namespace BetterTogether.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BetterTogether.Web.Data.Entities.EventSignUp", b =>
-                {
-                    b.HasOne("BetterTogether.Web.Data.Entities.Event", "Event")
-                        .WithMany("SignUps")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BetterTogether.Web.Data.Entities.SignUp", "SignUp")
-                        .WithMany("Events")
-                        .HasForeignKey("SignUpId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("SignUp");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -354,16 +281,6 @@ namespace BetterTogether.Web.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BetterTogether.Web.Data.Entities.Event", b =>
-                {
-                    b.Navigation("SignUps");
-                });
-
-            modelBuilder.Entity("BetterTogether.Web.Data.Entities.SignUp", b =>
-                {
-                    b.Navigation("Events");
                 });
 #pragma warning restore 612, 618
         }

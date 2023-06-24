@@ -1,16 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BetterTogether.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BetterTogether.Web.Pages;
 
+[AllowAnonymous]
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly IEventService _eventService;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(IEventService eventService)
     {
-        _logger = logger;
+        _eventService = eventService;
     }
 
-    public void OnGet() { }
+    public bool HasEvents { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        HasEvents = (await _eventService.GetActiveEvents()).Any();
+    }
 }

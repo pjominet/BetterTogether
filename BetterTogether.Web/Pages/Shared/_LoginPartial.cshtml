@@ -1,23 +1,25 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
+﻿@using BetterTogether.Web.Models.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav gap-2">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <span class="nav-link">
-                Hello @User.Identity?.Name
-            </span>
-        </li>
+        if (User.IsInRole(Roles.AdminRole))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-page="/Events/Index">Events</a>
+            </li>
+        }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-sm btn-danger text-light">Logout</button>
+                <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
 </ul>

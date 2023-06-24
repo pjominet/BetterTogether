@@ -1,0 +1,111 @@
+﻿@page
+@model BetterTogether.Web.Pages.SignUpsModel
+
+@{
+    ViewData["Title"] = "My Sign-ups";
+}
+
+<section class="d-flex flex-column gap-3 justify-content-center align-items-center h-100">
+    @if (Model.SignUp is not null && Model.SignedUpEvents.Any())
+    {
+        <div class="card w-100 w-lg-75">
+            <div class="card-header">
+                <h1 class="h3 card-title">@ViewData["Title"]</h1>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var es in Model.SignedUpEvents)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="ms-2">
+                                @es.Event.Name (@es.Event.StartDate.ToString("g"))
+                            </div>
+                            <div class="hstack gap-2">
+                                <span class="badge bg-primary rounded-pill">Total Sign-ups: @es.SignUpCount</span>
+                                <button class="btn btn-sm btn-info" type="button" data-bs-toggle="modal" data-bs-target="#eventDetailsModal" data-event-id="@es.Event.Id">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                                <form method="post" asp-page-handler="Delete" class="d-flex justify-content-center">
+                                    <input type="hidden" name="signUpId" value="@Model.SignUp.Id"/>
+                                    <input type="hidden" name="eventId" value="@es.Event.Id"/>
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+    <div class="card w-100 w-lg-75">
+        <div class="card-header">
+            <h1 class="h3 card-title">Sign-up for an event</h1>
+        </div>
+        <div class="card-body">
+            @if (Model.AvailableEvents.Any())
+            {
+                <form method="post" asp-page-handler="Add">
+                    <div class="mb-3">
+                        <label for="eventSelect">Event</label>
+                        <div class="input-group">
+                            <select class="form-select" id="eventSelect" asp-for="SignUpEdit.EventId" required>
+                                @foreach (var e in Model.AvailableEvents)
+                                {
+                                    <option value="@e.Id">@e.Name (@e.StartDate.ToString("g"))</option>
+                                }
+                            </select>
+                            <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#eventDetailsModal" data-event-id="">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nameInput">First/Nick Name</label>
+                        <input type="text" value="@Model.SignUp?.Name" asp-for="SignUpEdit.Name" id="nameInput" class="form-control" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput">Email</label>
+                        <input type="text" value="@Model.SignUp?.Email" asp-for="SignUpEdit.Email" id="emailInput" class="form-control" required/>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success submit-signup-btn">
+                            Sign-up now
+                            <i class="bi bi-box-arrow-in-up-right ms-2"></i>
+                            <span class="ms-2 spinner-border spinner-border-sm d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>There currently no further events planned</p>
+            }
+        </div>
+    </div>
+</section>
+
+<div id="eventDetailsModal" class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventName"></h5>
+            </div>
+            <div class="modal-body">
+                <dl>
+                  <dt>When</dt>
+                    <dd id="eventDateTime" class="text-primary ms-3"></dd>
+                  <dt>What</dt>
+                  <dd id="eventDescription" class="ms-3"></dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

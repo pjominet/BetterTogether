@@ -4,58 +4,36 @@
     ViewData["Title"] = "Welcome";
 }
 
-<section class="d-flex justify-content-center align-items-center h-100">
-    <div class="carousel-dark slide w-75 w-lg-50" data-bs-ride="carousel" id="cardCarousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<section class="h-100 pt-3">
+    <div class="bg-light p-3">
+        <h1 class="h4">Welcome</h1>
+
+        <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus sit amet urna ac feugiat.
+            Ut non magna neque. Nullam euismod sem interdum, vulputate risus ut, consequat justo. In nec nunc
+            aliquet, laoreet erat ut, auctor sem. Aliquam erat volutpat. Donec quam augue, tincidunt sodales
+            aliquam quis, tempor sed tortor. Mauris eget porttitor eros. Sed sollicitudin congue augue, id
+            blandit nibh gravida vel. Etiam sit amet orci quis ligula gravida faucibus vel nec lacus. Ut sit
+            amet diam massa. Donec dignissim, lectus sit amet consectetur suscipit, quam felis feugiat velit,
+            vehicula consequat urna diam a ipsum. Phasellus maximus libero pellentesque ullamcorper elementum.
+            Pellentesque et libero in turpis pharetra malesuada quis a ex. Fusce dignissim dapibus diam, in
+            luctus mi molestie a. Quisque id dolor eget diam pharetra condimentum et sed leo. Suspendisse suscipit
+            elit sit amet fermentum semper.
+        </p>
+        @if (!Model.HasEvents)
+        {
+            <p>
+                <strong>There currently no events planned</strong>
+            </p>
+        }
+
+        <div class="d-flex justify-content-end">
+            @if (Model.HasEvents)
+            {
+                <a class="btn btn-primary" asp-area="" asp-page="/SignUps">
+                    <i class="bi bi-card-checklist me-2"></i>My sign-ups
+                </a>
+            }
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="card w-100" id="card1">
-                    <div class="card-header">
-                        <h4 class="card-title">Welcome</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text" style="min-height: 5rem;">
-                            Hello
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card w-100" id="card2">
-                    <div class="card-header">
-                        <h4 class="card-title">Sign-up</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text" style="min-height: 5rem;">
-                            Test
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card w-100" id="card3">
-                    <div class="card-header">
-                        <h4 class="card-title">Thanks</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text" style="min-height: 5rem;">
-                            Bye
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
 </section>

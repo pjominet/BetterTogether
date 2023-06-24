@@ -3,6 +3,7 @@ using System;
 using BetterTogether.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BetterTogether.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230624161301_AddMissingsForeignKeys")]
+    partial class AddMissingsForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -26,11 +29,7 @@ namespace BetterTogether.Web.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2023, 6, 24, 19, 56, 47, 392, DateTimeKind.Local).AddTicks(424));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasDefaultValue(new DateTime(2023, 6, 24, 18, 13, 1, 651, DateTimeKind.Local).AddTicks(7545));
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -74,7 +73,7 @@ namespace BetterTogether.Web.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2023, 6, 24, 19, 56, 47, 392, DateTimeKind.Local).AddTicks(3210));
+                        .HasDefaultValue(new DateTime(2023, 6, 24, 18, 13, 1, 652, DateTimeKind.Local).AddTicks(238));
 
                     b.Property<string>("Email")
                         .IsRequired()
