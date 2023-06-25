@@ -1,0 +1,31 @@
+﻿@import 'theme';
+
+html, body {
+    font-size: $font-size-small;
+    min-height: 100vh;
+}
+
+@media (min-width: $bp-md) {
+    html, body {
+        font-size: $font-size-default;
+    }
+}
+
+body {
+    position: relative;
+    background-color: aliceblue;
+}
+
+.navbar {
+    height: $navbar-height;
+}
+
+main {
+    background-color: #badbcc;
+    height: calc(100vh - $navbar-height);
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

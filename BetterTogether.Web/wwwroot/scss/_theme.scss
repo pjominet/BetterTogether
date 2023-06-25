@@ -1,0 +1,87 @@
+﻿@import 'variables';
+
+/* bootstrap variable override */
+$theme-colors: (
+    "dark": $dark,
+    "light": $light,
+    "primary": $primary,
+    "secondary": $secondary,
+    "danger": $danger,
+    "warning": $warning,
+    "success": $success,
+    "info": $info
+);
+
+$enable-responsive-font-sizes: true;
+$enable-rounded: true;
+
+$tooltip-arrow-color: $gray-800;
+$tooltip-bg: $gray-800;
+
+$border-radius: .6rem;
+$border-radius-lg: .72rem;
+$border-radius-sm: .48rem;
+
+/* Load Bootstrap to save overrides */
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+/* overload mixins */
+@import 'mixins';
+
+body {
+    font-family: $font-family-base;
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: $font-family-headings;
+    }
+}
+
+.w {
+    &-33 {
+        width: 33% !important;
+    }
+
+    &-66 {
+        width: 66% !important;
+    }
+
+    @media (min-width: $bp-md) {
+        &-md {
+            &-25 {
+                width: 25% !important;
+            }
+
+            &-33 {
+                width: 33% !important;
+            }
+
+            &-50 {
+                width: 50% !important;
+            }
+
+            &-66 {
+                width: 66% !important;
+            }
+
+            &-75 {
+                width: 75% !important;
+            }
+
+            &-100 {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: calc(#{$bp-fhd} + 2px)) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1920px;
+    }
+}
+
+@media screen and (min-width: $bp-lg) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1440px;
+    }
+}

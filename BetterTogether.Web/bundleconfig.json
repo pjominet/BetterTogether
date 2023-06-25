@@ -1,0 +1,11 @@
+﻿[
+    {
+        "outputFileName": "vendor.common.js",
+        "inputFiles": [
+            "./node_modules/jquery/dist/jquery.js",
+            "./node_modules/jquery-validation/dist/jquery.validate.js",
+            "./node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+            "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+        ]
+    }
+]
